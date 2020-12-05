@@ -54,30 +54,14 @@ class passport {
         void add_info(string info) {
             string info_type = info.substr(0, 3);
             string info_val = info.substr(4);
-            if (info_type == "byr") { 
-                birth_year = info_val; 
-            } 
-            else if (info_type == "iyr") { 
-                issue_year = info_val; 
-            } 
-            else if (info_type == "eyr") { 
-                expiration_year = info_val; 
-            } 
-            else if (info_type == "hgt") { 
-                height = info_val; 
-            } 
-            else if (info_type == "hcl") { 
-                hair_colour = info_val; 
-            } 
-            else if (info_type == "ecl") { 
-                eye_colour = info_val; 
-            } 
-            else if (info_type == "pid") { 
-                passport_id = info_val;
-            } 
-            else if (info_type == "cid") { 
-                country_id = info_val;
-            } 
+            if (info_type == "byr")      { birth_year = info_val; } 
+            else if (info_type == "iyr") { issue_year = info_val; } 
+            else if (info_type == "eyr") { expiration_year = info_val; } 
+            else if (info_type == "hgt") { height = info_val; } 
+            else if (info_type == "hcl") { hair_colour = info_val; } 
+            else if (info_type == "ecl") { eye_colour = info_val; } 
+            else if (info_type == "pid") { passport_id = info_val; } 
+            else if (info_type == "cid") { country_id = info_val; } 
             else { cout << "Unkown info_type: " << info_type << " with value " << info_val << endl; }
         }
 
