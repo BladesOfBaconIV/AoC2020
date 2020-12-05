@@ -1,7 +1,7 @@
 
 /*
  *  Note for this problem the input was modified to reduce the complexity of the code
- *  replace all the blank lines in the input with a single '#' character (in vim do :%s/^$/#/g)
+ *  replace all the blank lines in the input with a single '#' character (in vim run :%s/^$/#/g)
  */
 
 
@@ -27,12 +27,10 @@ bool valid_height(string h) {
 }
 
 bool valid_hair(string hc) {
-    //cout << hc;
     bool valid_hc = hc[0] == '#';
     for (char c: hc.substr(1)) {
         valid_hc = valid_hc && isalnum(c);
     }
-    //cout << valid_hc << endl;
     return valid_hc;
 }
 
