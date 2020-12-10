@@ -5,75 +5,11 @@
 #include <string>
 #include <set>
 
+#include "../utils/graph.h"
+
 using namespace std;
 
 const string TARGET_BAG = "shiny gold";
-
-template <class T>
-class graph {
-    public:
-        map<T, set<pair<int, T>>> g;
-    public:
-        graph() : g{} {}
-        
-        void add_edge(T src, T dest, int weight = 1) {
-            auto it = g.find(src);
-            if (it == g.end()) {
-                set<pair<int, T>> s{};
-                s.insert(pair<int, T>(weight, dest));
-                g.insert(pair<T, set<pair<int, T>>>(src, s));
-            } else {
-                it->second.insert(pair<int, T>(weight, dest));
-            }
-        }
-
-        bool path_exists(T src, T dest, set<T> known_connected = set<string>()) {
-            auto it = g.find(src);
-            if (it == g.end()) {
-                return false;
-            } else {
-                bool path = false;
-                for (pair<int, T> edge : it->second) {
-                    if (path || edge.second == dest || known_connected.find(edge.second) != known_connected.end()) {
-                        known_connected.insert(src);
-                        return true;
-                    } else {
-                        path = path_exists(edge.second, dest, known_connected);
-                    }
-                }
-                if (path) {
-                    known_connected.insert(src);
-                }
-                return path;
-            }
-        }
-
-        int contents(T root) {
-            int total_contained = 0;
-            auto it = g.find(root);
-            if (it != g.end()) {
-                for (pair<int, T> holding : it->second) {
-                    total_contained += holding.first;
-                    total_contained += holding.first * contents(holding.second);
-                }
-            }
-            return total_contained;
-        }
-};
-
-template <class T>
-ostream& operator<<(ostream& os, const graph<T>& __g) {
-    cout << "{" << endl;
-    for (pair<T, set<pair<int, T>>> p : __g.g) {
-        cout << "    " << p.first << " : [";
-        for (pair<int, T> v : p.second) {
-            cout << v.second << " (" << v.first << "), ";
-        }
-        cout << "]," << endl;
-    }
-    cout << "}";
-    return cout;
-}
 
 int main() {
     auto const pattern_src = regex("^(\\w+ \\w+) .*$");
